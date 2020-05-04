@@ -4,7 +4,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Exceptions</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 	<h1>Exceptions with JQuery</h1>
@@ -15,7 +15,15 @@
 
 <script type="text/javascript">
 	function myFunc() {
-		alert($('#textField').val());
+		$.ajax({
+			method : "POST",
+			url : "exceptionServlet",
+			data : {
+				textField : $('#textField').val()
+			}
+		}).always(function(xhr, status, error) {
+			alert("error: " + error);
+		});
 	}
 </script>
 
