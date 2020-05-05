@@ -3,16 +3,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>JSP Avancado</title>
+<title>Access</title>
 </head>
 <body>
-	<h1>AJAX</h1>
-	<br>
-	<a href="exceptions.jsp">Exceptions</a>
-	<br>
-	<a href="access.jsp">System access</a>
-	<br>
-	<a href="loginServlet?action=logoff">Logoff</a>
+	<h1>System access</h1>
 	<br>
 </body>
 </html>

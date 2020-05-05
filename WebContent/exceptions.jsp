@@ -21,8 +21,9 @@
 			data : {
 				textField : $('#textField').val()
 			}
-		}).always(function(xhr, status, error) {
-			alert("error: " + error);
+		})
+		.fail(function(xhr, status, error) {
+			alert("error: " + error.toString());
 		});
 	}
 </script>

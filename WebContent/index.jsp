@@ -12,7 +12,7 @@
 	<div class="contact1">
 		<div class="container-contact1">
 			<span class="contact1-form-title"> Testes em JSP com Servlets </span>
-			<form action="LoginServlet" method="post" class="contact1-form validate-form" onsubmit="return validateFields()">
+			<form action="loginServlet" method="post" class="contact1-form validate-form" onsubmit="return validateFields()">
 				<br>
 				Login:
 				<div class="wrap-input1 validate-input">
