@@ -15,7 +15,6 @@ public class CategoryDAO {
     List<Category> categories = new ArrayList<>();
     Connection connection = DBConnection.getConnection();
     String sql = "select * from category order by name asc";
-
     try {
       PreparedStatement ps = connection.prepareStatement(sql);
       ps.execute();

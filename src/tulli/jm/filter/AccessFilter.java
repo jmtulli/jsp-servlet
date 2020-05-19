@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import tulli.jm.model.User;
 
-@WebFilter({"/access.jsp", "/exceptions.jsp"})
+@WebFilter({"/access.jsp", "/exceptions.jsp", "/load.jsp", "/progress.jsp", "/upload.jsp", "/datatable.jsp", "/report.jsp"})
 public class AccessFilter implements Filter {
 
   public void destroy() {}

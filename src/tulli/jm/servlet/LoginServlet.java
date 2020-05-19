@@ -38,7 +38,6 @@ public class LoginServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     if ("logoff".equals(request.getParameter("action"))) {
-      System.out.println("invalidate");
       request.getSession().invalidate();
       RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
       dispatcher.forward(request, response);
