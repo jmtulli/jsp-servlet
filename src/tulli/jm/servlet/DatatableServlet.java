@@ -1,17 +1,23 @@
 package tulli.jm.servlet;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+
+import net.sf.jasperreports.engine.JRException;
 import tulli.jm.dao.CategoryDAO;
 import tulli.jm.model.Category;
-import tulli.jm.service.ReportService;
+import tulli.jm.report.ReportService;
 
 @WebServlet("/datatableServlet")
 public class DatatableServlet extends HttpServlet {
@@ -37,15 +43,40 @@ public class DatatableServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    System.out.println("dopost");
-    String parameter = request.getParameter("action");
-    System.out.println("param " + parameter);
+    String reportType = request.getParameter("type");
+    String reportName = "Categories";
 
     CategoryDAO dao = new CategoryDAO();
     List<Category> data = dao.listCategory();
 
     if (data.size() > 0) {
-      ReportService.GenerateReport(data);
+      try {
+        File reportFile = new ReportService().GenerateReportFile(data, request.getSession().getServletContext(), reportType, reportName);
+
+        FileInputStream inputStream = new FileInputStream(reportFile);
+        String mimeType = request.getServletContext().getMimeType(reportFile.getPath());
+        response.setContentType(mimeType);
+        response.setContentLength((int) reportFile.length());
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + reportFile.getName() + "\"");
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        byte[] buffer = new byte[4096];
+
+        int readSize = inputStream.read(buffer);
+        while (readSize != -1) {
+          outputStream.write(buffer, 0, readSize);
+          readSize = inputStream.read(buffer);
+        }
+
+        outputStream.flush();
+        outputStream.close();
+        inputStream.close();
+        reportFile.delete();
+        FileUtils.cleanDirectory(reportFile.getParentFile());
+        reportFile.getParentFile().delete();
+      } catch (JRException e) {
+        e.printStackTrace();
+      }
     }
   }
 }

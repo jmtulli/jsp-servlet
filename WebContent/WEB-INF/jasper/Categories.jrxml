@@ -55,7 +55,7 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="40">
+		<band height="44">
 			<textField>
 				<reportElement x="20" y="0" width="50" height="30" uuid="3c965bc2-3792-4b03-989a-a49a8457d686"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>

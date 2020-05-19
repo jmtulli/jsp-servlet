@@ -14,7 +14,9 @@
 	<div id="datatable"></div>
 	<br>
 	<form action="datatableServlet" id="form" method="post">
-		<button onclick="document.getElementById('form').action='datatableServlet?action=report'">Generate</button>
+		<button onclick="document.getElementById('form').action='datatableServlet?type=pdf'">Generate PDF</button>
+		<button onclick="document.getElementById('form').action='datatableServlet?type=html'">Generate HTML</button>
+		<button onclick="document.getElementById('form').action='datatableServlet?type=xls'">Generate XLS</button>
 	</form>
 </body>
 <script type="text/javascript">
